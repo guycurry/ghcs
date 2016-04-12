@@ -18,3 +18,9 @@
 .cust-width-100pct {
 	width: 100% !important;
   }
+
+.clear { clear: both;}
+
+.cust-panal-margin-bottom {  
+  margin-bottom: 9px; 
+  }
