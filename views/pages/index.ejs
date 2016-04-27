@@ -4,6 +4,7 @@
       <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
       <script src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
       <link rel="stylesheet" href="css/bootstrap-PaperTheme.css">
+      <link rel="stylesheet" href="css/flip.css">
       <link rel="stylesheet" href="EatMeCustomStyles.css">
       
       <script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -12,32 +13,6 @@
       <script src="js/angular-drag-and-drop-lists.js"></script>
       <script src="js/ColorThief/dist/color-thief.min.js"></script>
       <script src="js/jquery.matchHeight.js"></script>
-
-      <script>
-      $( '#1-img img' ).load(
-      function(){
-        //$('*[id*=-img]').each(function() {
-          alert('test');
-          console.log('this=');
-          console.log(this);
-          console.log(this.id);
-          var cardId = this.id.substring(0,this.id.length-4)+ '-card';
-          
-          console.log('height');
-          console.log($('#'+this.id).height());
-          var img = document.getElementById(this.id);
-          console.log(img);
-          console.log(img.clientHeight);
-          console.log(img.height);
-          console.log($('#'+cardId).height());
-          $('#'+cardId).height($('#'+this.id).height());
-          console.log($('#'+cardId).height());
-
-          console.log($('#'+cardId));
-        //});
-      });
-
-      </script>
 
 
   <head>
@@ -70,34 +45,34 @@
   <body style="background: #f2f2f2">
     <div class="container-fluid col-lg-9" id="outer-container" style="width=72% important!;">
     
-      <div class="col-lg-3" style="top:74px;">
-        <div style="height:251px important!;">
-          <div id="img1-master" class="flip-container" >
-            <div id="" class="flipper" style="height:251px important!;">
-              <img id="1-img" class="front" src="img/sweet-dinner-rolls.jpg">
-              <div id="1-card" class="back">
-              <div style="position: relative; top:0;left:0; height: 251px;background-color:#000000;" > Test </div>
-            </div>
-            </div>
+      <div class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
+
+        <div id="1-holder" class="card effect__click " style="">
+          <img id="1-img"  class="card__front img-border-radius panel" src="img/sweet-dinner-rolls.jpg">
+          <div id="1-card" class="card__back  img-border-radius panel" style="background-color:#000000;">
+            test
           </div>
         </div>
-        <div id="img1-master" class="flip-container panel panel-default img-border-radius " >
-          <div id="" class="flipper" style="top: 251px;">
-            <img id="2-img" class="front cust-width-100pct" src="img/Shrimp-Florentine.jpg">
-            <div id="2-card" class="back">
-              <div style="position: relative; top:0;left:0; height: 251px;background-color:#000000;" > Test </div>
-            </div>
+        
+
+        <div id="2-holder" class="card effect__click " style="">
+          <img id="2-img"  class="card__front img-border-radius panel" src="img/Shrimp-Florentine.jpg">
+          <div id="2-card" class="card__back  img-border-radius panel" style="background-color:#000000;">
+            test
           </div>
         </div>
-        <!--
-        <div id="img3-master" class="">
-          <img class="" src="img/Japanese-Chicken-Wings.jpg">
+
+        <div id="3-holder" class="card effect__click " style="">
+          <img id="3-img"  class="card__front img-border-radius panel" src="img/Japanese-Chicken-Wings.jpg">
+          <div id="3-card" class="card__back  img-border-radius panel" style="background-color:#000000;">
+            test
+          </div>
         </div>
-        -->        
+     
       </div>
       
 
-      <div class="col-lg-3" style="top:74px;">
+      <div class="col-lg-3 col-md-3" style="top:74px;">
         <div class="clear">
           <img class="cust-width-100pct img-border-radius panel panel-default cust-panal-margin-bottom" src="img/roquefort-pear-salad.jpg">
         </div>
@@ -110,7 +85,7 @@
       </div>
 
 
-      <div class="col-lg-3" style="top:74px;">
+      <div class="col-lg-3 col-md-3" style="top:74px;">
         <div class="clear">
           <img class="cust-width-100pct img-border-radius panel panel-default cust-panal-margin-bottom" src="img/Poached-Eggs-Asparagus.jpg">
         </div>
@@ -123,7 +98,7 @@
       </div>
 
 
-      <div class="col-lg-3" style="top:74px;">
+      <div class="col-lg-3 col-md-3" style="top:74px;">
         <div class="clear">
           <img class="cust-width-100pct img-border-radius panel panel-default cust-panal-margin-bottom" src="img/Spinach-Artichoke-Dip.jpg">
         </div>
@@ -139,7 +114,7 @@
       </div>
     
 
-      <div class="col-lg-3" style="position:fixed; right:0px; top:74px;">
+      <div class="col-lg-3 col-md-3" style="position:fixed; right:0px; top:74px;">
         <div class="list-group">
           <a href="#" class="list-group-item active">
             <h4 class="list-group-item-heading">This Week's Plan</h4>
@@ -169,4 +144,92 @@
       </div>
     </div>
   </body>
+
+      <script>
+      imageLoadScriptWindow = function()
+      {
+        $('*[id*=-img]:visible').each(function() {
+            imageLoadScript(this);
+          });
+      }
+      imageLoadScript = function(element)
+      {
+        if( element == undefined )
+          element = this;
+
+        var cardId = element.id.substring(0,element.id.length-4)+ '-card';
+        $('#'+cardId).height($('#'+element.id).height());
+
+      }
+      $(window).ready(imageLoadScriptWindow);
+        
+      $( '#1-img' ).load(imageLoadScript);
+      
+
+      </script>
+
+      <script>
+      /**
+       * Do the clicking stuff
+       *
+       */
+
+      (function() {
+        var cards = document.querySelectorAll(".card.effect__click");
+        for ( var i  = 0, len = cards.length; i < len; i++ ) {
+          var card = cards[i];
+          clickListener( card );
+        }
+
+        function clickListener(card) {
+          card.addEventListener( "click", function() {
+            var c = this.classList;
+            c.contains("flipped") === true ? c.remove("flipped") : c.add("flipped");
+          });
+        }
+      })();
+
+      /**
+       * Do the random stuff
+       *
+       */
+
+      (function() {
+
+        // cache vars
+        var cards = document.querySelectorAll(".card.effect__random");
+        var timeMin = 1;
+        var timeMax = 3;
+        var timeouts = [];
+
+        // loop through cards
+        for ( var i = 0, len = cards.length; i < len; i++ ) {
+          var card = cards[i];
+          var cardID = card.getAttribute("data-id");
+          var id = "timeoutID" + cardID;
+          var time = randomNum( timeMin, timeMax ) * 1000;
+          cardsTimeout( id, time, card );
+        }
+
+        // timeout listener
+        function cardsTimeout( id, time, card ) {
+          if (id in timeouts) {
+            clearTimeout(timeouts[id]);
+          }
+          timeouts[id] = setTimeout( function() {
+            var c = card.classList;
+            var newTime = randomNum( timeMin, timeMax ) * 1000;
+            c.contains("flipped") === true ? c.remove("flipped") : c.add("flipped");
+            cardsTimeout( id, newTime, card );
+          }, time );
+        }
+
+        // random number generator given min and max
+        function randomNum( min, max ) {
+          return Math.random() * (max - min) + min;
+        }
+
+      })();
+      </script>
+
 </html>
