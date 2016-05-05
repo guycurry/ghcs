@@ -25,19 +25,21 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 			"desc":desc,
 			"imgURL":imgURL
 		};
-		console.log("recipie=");
-		console.log(recipie);
 		recipie.index = $scope.recipies.push(recipie)-1;
 		recipie.column = recipie.index%4;// will change to 5 when 5th column is implemented.
-		console.log(recipie);
-		console.log($scope.recipies[0]);
+		recipie.img = new Image();
+		recipie.img.r = recipie;
+		recipie.img.onload = function() {
+			this.r.heightPct = this.height / this.width * 100;
+			$scope.$apply();
+		}
+		recipie.img.src = imgURL;
 
 	}
 
 
 	$scope.showCardDetails = function(cardId)
 	{
-		console.log("cardId="+cardId);
 		var imgClass = $('#'+cardId+'-img')[0].classList;
 		imgClass.contains("blurImg") === true ? imgClass.remove("blurImg") : imgClass.add("blurImg");
 		imgClass.contains("unblurImg") === true ? imgClass.remove("unblurImg") : imgClass.add("unblurImg");
@@ -49,6 +51,9 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 	}
 
+	$scope.buildRecipie(1, "Roquefort Pear Salad", 
+		"test...", 
+		"img/roquefort-pear-salad.jpg");
 	$scope.buildRecipie(1, "Sweet Dinner Rolls", 
 		"test...", 
 		"img/sweet-dinner-rolls.jpg");
@@ -58,9 +63,7 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 	$scope.buildRecipie(1, "Japanese Chicking Wings", 
 		"test...", 
 		"img/Japanese-Chicken-Wings.jpg");
-	$scope.buildRecipie(1, "Roquefort Pear Salad", 
-		"test...", 
-		"img/roquefort-pear-salad.jpg");
+
 	$scope.buildRecipie(1, "Worlds Best Lasagna", 
 		"test...", 
 		"img/worlds-best-lasagna.jpg");

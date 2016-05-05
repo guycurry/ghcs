@@ -54,29 +54,12 @@
     
       <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
 
-        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 0}">
-          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;"></div>
-          <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="height:auto;background-color: rgba(255, 255, 255, .5);display:none;">
-            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)" >&times;</button>
-            <div>
 
-              <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
-              <h5 id="{{recipie.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;"{{recipie.desc}}"</h5>
-            </div>
-            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
-              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
-              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;"> Recipie</a>
-            </div>
-          </div>
-        </div>
-     
-      </div>
-      <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
-        
-        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 1}">
-          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;"></div>
+
+        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 0}" style="padding-bottom:{{recipie.heightPct}}%;">
+          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
           <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
-            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)" >&times;</button>
+            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)">&times;</button>
             <div>
 
               <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
@@ -90,12 +73,12 @@
         </div>
       </div>
 
+
       <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
-        
-        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 2}">
-          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;"></div>
+        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 1}" style="padding-bottom:{{recipie.heightPct}}%;">
+          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
           <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
-            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)" >&times;</button>
+            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)">&times;</button>
             <div>
 
               <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
@@ -108,13 +91,13 @@
           </div>
         </div>
       </div>
+
 
       <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
-        
-        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 3}">
-          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;"></div>
-          <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="height:auto;background-color: rgba(255, 255, 255, .5);display:none;">
-            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)" >&times;</button>
+        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 2}" style="padding-bottom:{{recipie.heightPct}}%;">
+          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
+          <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)">&times;</button>
             <div>
 
               <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
@@ -128,6 +111,27 @@
         </div>
       </div>
 
+
+      <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
+        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 3}" style="padding-bottom:{{recipie.heightPct}}%;">
+          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
+          <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)">&times;</button>
+            <div>
+
+              <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
+              <h5 id="{{recipie.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;"{{recipie.desc}}"</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;"> Recipie</a>
+            </div>
+          </div>
+        </div>
+
+      
+      </div>
+    
 
       <div class="col-lg-3 col-md-3" style="position:fixed; right:0px; top:74px;">
         <div class="list-group">
