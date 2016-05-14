@@ -16,6 +16,10 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 	console.log("eatMe App Start");
 	$scope.recipies = new Array();
+	$scope.currentWidth = $(window).width();
+	$scope.prevColumns = 0;
+	$scope.currentColumns = 0;
+
 
 	$scope.buildRecipie = function(id, name, desc, imgURL)
 	{
@@ -26,7 +30,7 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 			"imgURL":imgURL
 		};
 		recipie.index = $scope.recipies.push(recipie)-1;
-		recipie.column = recipie.index%4;// will change to 5 when 5th column is implemented.
+		recipie.column = 0;//recipie.index%4;// will change to 5 when 5th column is implemented.
 		recipie.img = new Image();
 		recipie.img.r = recipie;
 		recipie.img.onload = function() {
@@ -79,6 +83,51 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 	$scope.buildRecipie(1, "Vanilla Crapes", 
 		"test...", 
 		"img/vanilla-crapes.jpg");
+
+	$scope.CalcColumns = function(numColumns)
+	{
+		var FiveCol  = 1200;
+		var FourCol  = 992;
+		var ThreeCol = 768;
+		$scope.currentWidth = $(window).width();
+		//$scope.prevColumns = 0;
+		//$scope.currentColumns = 0;
+
+		if( $scope.currentWidth > 1200 )
+			$scope.currentColumns = 5;
+		else if( $scope.currentWidth > 992 )
+			$scope.currentColumns = 4;
+		else if( $scope.currentWidth > 768 )
+			$scope.currentColumns = 3;
+		else
+			$scope.currentColumns = 1;
+
+		if( $scope.currentColumns != $scope.prevColumns )
+		{
+			$scope.prevColumns = $scope.currentColumns;
+			$scope.SetColumns($scope.currentColumns);
+		}
+
+	}
+
+
+	$scope.SetColumns = function(numColumns)
+	{
+	    for(var x = 0; x < $scope.recipies.length; x++)
+	    {
+	    	 var Recipie = $scope.recipies[x];
+	    	 Recipie.column = Recipie.index%numColumns;
+	    }
+	    alert('test');
+	    $scope.$apply();
+	}
+
+	// run test on initial page load
+	$scope.CalcColumns();
+
+	// run setColumns on resize of the window
+	$(window).resize($scope.CalcColumns);
+	
 
 
 }]);

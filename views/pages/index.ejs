@@ -12,7 +12,6 @@
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
       <script src="js/angular-drag-and-drop-lists.js"></script>
-      
       <!--
       <script src="js/ColorThief/dist/color-thief.min.js"></script>
       <script src="js/jquery.matchHeight.js"></script>
@@ -50,12 +49,9 @@
       </form>
     </div>
      
-    <div class="container-fluid col-lg-9" id="outer-container" style="width=72% important!;">
+    <div class="container-fluid " id="outer-container" style="padding-top:74px;">
     
-      <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
-
-
-
+      <div id="col-1"  class="col clearfix">
         <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 0}" style="padding-bottom:{{recipie.heightPct}}%;">
           <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
           <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
@@ -74,7 +70,7 @@
       </div>
 
 
-      <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
+      <div id="col-2"  class="col clearfix" style="top:74px;">
         <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 1}" style="padding-bottom:{{recipie.heightPct}}%;">
           <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
           <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
@@ -93,7 +89,7 @@
       </div>
 
 
-      <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
+      <div id="col-3"  class="col clearfix" >
         <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 2}" style="padding-bottom:{{recipie.heightPct}}%;">
           <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
           <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
@@ -112,7 +108,7 @@
       </div>
 
 
-      <div id="col-1"  class="col-lg-3 col-md-3 section__content clearfix" style="top:74px;">
+      <div id="col-4"  class="col clearfix" >
         <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 3}" style="padding-bottom:{{recipie.heightPct}}%;">
           <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
           <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
@@ -128,12 +124,46 @@
             </div>
           </div>
         </div>
+      </div>
 
-      
+      <div id="col-5"  class="col clearfix" >
+        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 4}" style="padding-bottom:{{recipie.heightPct}}%;">
+          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
+          <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)">&times;</button>
+            <div>
+
+              <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
+              <h5 id="{{recipie.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;"{{recipie.desc}}"</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;"> Recipie</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="col-6"  class="col clearfix" >
+        <div id="{{recipie.index}}" class="card" ng-repeat="recipie in recipies | filter:{column : 5}" style="padding-bottom:{{recipie.heightPct}}%;">
+          <div id="{{recipie.index}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipie.index)" style="background-image:url({{recipie.imgURL}});width:100%;padding-bottom:{{recipie.heightPct}}%"></div>
+          <div id="{{recipie.index}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipie.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipie.index)">&times;</button>
+            <div>
+
+              <h3 id="{{recipie.index}}-title" class="cardTitle effect__click">{{recipie.name}}</h3>
+              <h5 id="{{recipie.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;"{{recipie.desc}}"</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;"> Recipie</a>
+            </div>
+          </div>
+        </div>
       </div>
     
 
-      <div class="col-lg-3 col-md-3" style="position:fixed; right:0px; top:74px;">
+      <div class="col-lg-3 col-md-3" style="display:none; position:fixed; right:0px; top:74px;">
         <div class="list-group">
           <a href="#" class="list-group-item active">
             <h4 class="list-group-item-heading">This Week's Plan</h4>
@@ -164,78 +194,7 @@
     </div>
   </body>
 
-      <script>
-      /*
-      imageLoadScriptWindow = function()
-      {
-        $('*[id*=-img]:visible').each(function() {
-            imageLoadScript(this);
-          });
-      }
-      setBackOfCardHeight = function(element)
-      {
-        if( element == undefined )
-          element = this;
-        if( element.id.indexOf('-img') == -1 )
-          return;
-
-        var cardId = element.id.substring(0,element.id.length-4)+ '-card';
-        $('#'+cardId).height($('#'+element.id).height());
-
-      }
-      //$(window).ready(imageLoadScriptWindow);
-        
-      //$( '#1-img' ).load(imageLoadScript);
-      */      
-
-      </script>
-
-      <script>
-      /**
-       * Do the clicking stuff
-       *
-       */
-
-/*
-      (function() {
-        var cards = document.querySelectorAll(".card.effect__click");
-        for ( var i  = 0, len = cards.length; i < len; i++ ) 
-          clickListener( cards[i] );
-
-        var close = document.querySelectorAll(".close.effect__click");
-        for ( var i  = 0, len = close.length; i < len; i++ ) 
-          clickListener( close[i] );
 
 
-        function clickListener(card) {
-          card.addEventListener( "click", function() {
-
-            if( this.id.indexOf('-img') != -1 )
-              showCardDetails(this.id.substring(0, this.id.indexOf('-img')));
-
-            else if( this.id.indexOf('-close') != -1 )
-              showCardDetails(this.id.substring(0, this.id.indexOf('-close')));
-            
-          });
-        }
-      })();
-
-
-      function showCardDetails(cardId)
-      {
-        console.log("cardId="+cardId);
-        var imgClass = $('#'+cardId+'-img')[0].classList;
-        imgClass.contains("blurImg") === true ? imgClass.remove("blurImg") : imgClass.add("blurImg");
-        imgClass.contains("unblurImg") === true ? imgClass.remove("unblurImg") : imgClass.add("unblurImg");
-        
-        if( imgClass.contains("blurImg") == true )
-          $('#'+cardId+'-card').fadeIn(200);
-        else
-          $('#'+cardId+'-card').fadeOut(200);
-        
-      }*/
-
-
-      </script>
 
 </html>
