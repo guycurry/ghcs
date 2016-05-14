@@ -31,7 +31,20 @@
 
 
 
-@media (min-width: 768px){
+
+@media (min-width: 320px) {
+  
+  
+  .col {
+  float: left;
+  width: 50%;
+  padding-left: 4px;
+  padding-right: 4px;
+
+}
+}
+
+@media (min-width: 500px){
   
   
   .col {
@@ -41,9 +54,9 @@
   padding-right: 4px;
 
 }
+}
 
-
-@media (min-width: 992px) {
+@media (min-width: 700px) {
   
   
   .col {
@@ -53,7 +66,7 @@
   padding-right: 4px;
 
 }
-
+}
 
 @media (min-width: 1200px) {
   
@@ -64,4 +77,5 @@
   padding-left: 4px;
   padding-right: 4px;
 
+}
 }

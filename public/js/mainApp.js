@@ -93,10 +93,12 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 		if( $scope.currentWidth > 1200 )
 			$scope.currentColumns = 5;
-		else if( $scope.currentWidth > 992 )
+		else if( $scope.currentWidth > 700 )
 			$scope.currentColumns = 4;
-		else if( $scope.currentWidth > 768 )
+		else if( $scope.currentWidth > 500 )
 			$scope.currentColumns = 3;
+		else if( $scope.currentWidth > 320 )
+			$scope.currentColumns = 2;
 		else
 			$scope.currentColumns = 1;
 
