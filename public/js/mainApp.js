@@ -21,23 +21,23 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 	$scope.currentColumns = 0;
 
 
-	$scope.buildRecipie = function(id, name, desc, imgURL)
+	$scope.buildRecipe = function(id, name, desc, imgURL)
 	{
-		var recipie = {
+		var recipe = {
 			"id":id,
 			"name":name,
 			"desc":desc,
 			"imgURL":imgURL
 		};
-		recipie.index = $scope.recipies.push(recipie)-1;
-		recipie.column = 0;//recipie.index%4;// will change to 5 when 5th column is implemented.
-		recipie.img = new Image();
-		recipie.img.r = recipie;
-		recipie.img.onload = function() {
+		recipe.index = $scope.recipies.push(recipe)-1;
+		recipe.column = 0;//recipie.index%4;// will change to 5 when 5th column is implemented.
+		recipe.img = new Image();
+		recipe.img.r = recipe;
+		recipe.img.onload = function() {
 			this.r.heightPct = this.height / this.width * 100;
 			$scope.$apply();
 		}
-		recipie.img.src = imgURL;
+		recipe.img.src = imgURL;
 
 	}
 
@@ -55,32 +55,32 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 	}
 
-	$scope.buildRecipie(1, "Roquefort Pear Salad", 
+	$scope.buildRecipe(1, "Roquefort Pear Salad", 
 		"test...", 
 		"img/roquefort-pear-salad.jpg");
-	$scope.buildRecipie(1, "Sweet Dinner Rolls", 
+	$scope.buildRecipe(1, "Sweet Dinner Rolls", 
 		"test...", 
 		"img/sweet-dinner-rolls.jpg");
-	$scope.buildRecipie(1, "Srimp Florentine", 
+	$scope.buildRecipe(1, "Srimp Florentine", 
 		"test...", 
 		"img/Shrimp-Florentine.jpg");
-	$scope.buildRecipie(1, "Japanese Chicking Wings", 
+	$scope.buildRecipe(1, "Japanese Chicking Wings", 
 		"test...", 
 		"img/Japanese-Chicken-Wings.jpg");
 
-	$scope.buildRecipie(1, "Worlds Best Lasagna", 
+	$scope.buildRecipe(1, "Worlds Best Lasagna", 
 		"test...", 
 		"img/worlds-best-lasagna.jpg");
-	$scope.buildRecipie(1, "Poached Eggs Asparagus", 
+	$scope.buildRecipe(1, "Poached Eggs Asparagus", 
 		"test...", 
 		"img/Poached-Eggs-Asparagus.jpg");
-	$scope.buildRecipie(1, "Honey Garlic Chicken", 
+	$scope.buildRecipe(1, "Honey Garlic Chicken", 
 		"test...", 
 		"img/honey-garlic-chicken.jpg");
-	$scope.buildRecipie(1, "Spinach Artichoke Dip", 
+	$scope.buildRecipe(1, "Spinach Artichoke Dip", 
 		"test...", 
 		"img/Spinach-Artichoke-Dip.jpg");
-	$scope.buildRecipie(1, "Vanilla Crapes", 
+	$scope.buildRecipe(1, "Vanilla Crapes", 
 		"test...", 
 		"img/vanilla-crapes.jpg");
 
@@ -90,8 +90,6 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 		var FourCol  = 992;
 		var ThreeCol = 768;
 		$scope.currentWidth = $(window).width();
-		//$scope.prevColumns = 0;
-		//$scope.currentColumns = 0;
 
 		if( $scope.currentWidth > 1200 )
 			$scope.currentColumns = 5;
@@ -115,10 +113,10 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 	{
 	    for(var x = 0; x < $scope.recipies.length; x++)
 	    {
-	    	 var Recipie = $scope.recipies[x];
-	    	 Recipie.column = Recipie.index%numColumns;
+	    	 var recipe = $scope.recipies[x];
+	    	 recipe.column = recipe.index%numColumns;
 	    }
-	    alert('test');
+
 	    $scope.$apply();
 	}
 
