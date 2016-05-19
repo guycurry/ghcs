@@ -1,3 +1,69 @@
+var error;
+
+$.ajax({
+    type: 'GET',
+    dataType: "text",
+    crossDomain: true,
+    url: "http://www.food2fork.com/api/search?key=a925701d9e7a6fa0d55dab718cbd854a",
+    success: function (responseData, textStatus, jqXHR) {
+        var authResult = JSON.parse(
+            responseData.replace(
+                '{"AuthenticateUserResult":"', ''
+            ).replace('}"}', '}')
+        );
+        console.log("in");
+    },
+    error: function (responseData, textStatus, errorThrown) {
+    	error=responseData;
+    	console.log(textStatus);
+    	console.log(errorThrown);
+        alert('POST failed.');
+    }
+});
+/*
+
+$.ajax({
+     url:urlTest,
+     dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
+     success:function(json){
+         // do stuff with json (in this case an array)
+         alert("Success");
+     },
+     error:function(e){
+     	error = e;
+     	console.log("error 1");
+     	console.log(e);
+         alert("Error");
+     },
+     beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-Foo', 'bar');        
+     }
+});
+
+
+
+$.ajax({
+   type: 'GET',
+    url: url,
+    async: false,
+    jsonpCallback: 'jsonCallback',
+    contentType: "application/json",
+    dataType: 'jsonp',
+    success: function(json) {
+       console.dir(json);
+    },
+    error: function(e) {
+       console.log(e.message);
+       console.log(e);
+       //console.log(json);
+       console.dir(e);
+       
+       
+    }
+});
+
+})(jQuery);*/
+
 console.log("mainApp.js start");
 
 
@@ -83,6 +149,13 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 	$scope.buildRecipe(1, "Vanilla Crapes", 
 		"test...", 
 		"img/vanilla-crapes.jpg");
+
+
+	
+	
+
+
+
 
 	$scope.CalcColumns = function(numColumns)
 	{
