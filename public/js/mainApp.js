@@ -1,68 +1,20 @@
-var error;
+var pg = require('pg');
 
-$.ajax({
-    type: 'GET',
-    dataType: "text",
-    crossDomain: true,
-    url: "http://www.food2fork.com/api/search?key=a925701d9e7a6fa0d55dab718cbd854a",
-    success: function (responseData, textStatus, jqXHR) {
-        var authResult = JSON.parse(
-            responseData.replace(
-                '{"AuthenticateUserResult":"', ''
-            ).replace('}"}', '}')
-        );
-        console.log("in");
-    },
-    error: function (responseData, textStatus, errorThrown) {
-    	error=responseData;
-    	console.log(textStatus);
-    	console.log(errorThrown);
-        alert('POST failed.');
-    }
-});
-/*
+pg.defaults.ssl = true;
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
 
-$.ajax({
-     url:urlTest,
-     dataType: 'jsonp', // Notice! JSONP <-- P (lowercase)
-     success:function(json){
-         // do stuff with json (in this case an array)
-         alert("Success");
-     },
-     error:function(e){
-     	error = e;
-     	console.log("error 1");
-     	console.log(e);
-         alert("Error");
-     },
-     beforeSend: function(xhr) {
-        xhr.setRequestHeader('X-Foo', 'bar');        
-     }
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
 });
 
+var recipes;
 
 
-$.ajax({
-   type: 'GET',
-    url: url,
-    async: false,
-    jsonpCallback: 'jsonCallback',
-    contentType: "application/json",
-    dataType: 'jsonp',
-    success: function(json) {
-       console.dir(json);
-    },
-    error: function(e) {
-       console.log(e.message);
-       console.log(e);
-       //console.log(json);
-       console.dir(e);
-       
-       
-    }
-});
-
-})(jQuery);*/
 
 console.log("mainApp.js start");
 
@@ -81,35 +33,50 @@ var eatMeApp = angular.module('eatMeApp', [])
 eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope, $sce, $q){
 
 	console.log("eatMe App Start");
-	$scope.recipies = new Array();
+	$scope.recipes = new Array();
 	$scope.currentWidth = $(window).width();
 	$scope.prevColumns = 0;
 	$scope.currentColumns = 0;
+	$scope.searchString = "";
 
-
-	$scope.buildRecipe = function(id, name, desc, imgURL)
+	$scope.buildRecipe = function(recipe, api)
 	{
+		var id = recipe.RecipeID;
+		var name = recipe.Title;
+		var imgURL = recipe.PhotoUrl;
+		var recipeURL = recipe.WebURL;
+		var desc = "";
+
 		var recipe = {
 			"id":id,
 			"name":name,
 			"desc":desc,
-			"imgURL":imgURL
+			"imgURL":imgURL,
+			"recipeURL":recipeURL
 		};
-		recipe.index = $scope.recipies.push(recipe)-1;
-		recipe.column = 0;//recipie.index%4;// will change to 5 when 5th column is implemented.
+		//if the recipe doesn't have an image we don't want to render it.
+		if( recipe.imgURL.indexOf("recipe-no-image.jpg") != -1 )
+			return;
+		
+		recipe.column = 0;//recipe.index%4;// will change to 5 when 5th column is implemented.
 		recipe.img = new Image();
 		recipe.img.r = recipe;
 		recipe.img.onload = function() {
 			this.r.heightPct = this.height / this.width * 100;
 			$scope.$apply();
+			recipe.index = $scope.recipes.push(recipe)-1;
+			$scope.CalcColumns(true);
 		}
 		recipe.img.src = imgURL;
-
+		//$scope.CalcColumns(2);
 	}
 
 
-	$scope.showCardDetails = function(cardId)
+	$scope.showCardDetails = function(cardId, recipe)
 	{
+		console.log("recpie=");
+		console.log(recipe);
+		console.log(cardId);
 		var imgClass = $('#'+cardId+'-img')[0].classList;
 		imgClass.contains("blurImg") === true ? imgClass.remove("blurImg") : imgClass.add("blurImg");
 		imgClass.contains("unblurImg") === true ? imgClass.remove("unblurImg") : imgClass.add("unblurImg");
@@ -121,44 +88,47 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 	}
 
-	$scope.buildRecipe(1, "Roquefort Pear Salad", 
-		"test...", 
-		"img/roquefort-pear-salad.jpg");
-	$scope.buildRecipe(1, "Sweet Dinner Rolls", 
-		"test...", 
-		"img/sweet-dinner-rolls.jpg");
-	$scope.buildRecipe(1, "Srimp Florentine", 
-		"test...", 
-		"img/Shrimp-Florentine.jpg");
-	$scope.buildRecipe(1, "Japanese Chicking Wings", 
-		"test...", 
-		"img/Japanese-Chicken-Wings.jpg");
 
-	$scope.buildRecipe(1, "Worlds Best Lasagna", 
-		"test...", 
-		"img/worlds-best-lasagna.jpg");
-	$scope.buildRecipe(1, "Poached Eggs Asparagus", 
-		"test...", 
-		"img/Poached-Eggs-Asparagus.jpg");
-	$scope.buildRecipe(1, "Honey Garlic Chicken", 
-		"test...", 
-		"img/honey-garlic-chicken.jpg");
-	$scope.buildRecipe(1, "Spinach Artichoke Dip", 
-		"test...", 
-		"img/Spinach-Artichoke-Dip.jpg");
-	$scope.buildRecipe(1, "Vanilla Crapes", 
-		"test...", 
-		"img/vanilla-crapes.jpg");
-
-
-	
-	
-
-
-
-
-	$scope.CalcColumns = function(numColumns)
+	$scope.getRecipeJson = function(searchString, page) 
 	{
+	    var apiKey = "bpcoW9an7WP3BogL8uxt6SV9NftMJH53";
+	    var TitleKeyword = searchString;
+	    var pg = page;
+	    if( pg == undefined )
+	    	pg = 1;
+	    
+	    var url = "http://api2.bigoven.com/Recipes?"
+	    	  + "pg="+pg
+	    	  + "&rpp=40"
+	    	  + "&title_kw="+TitleKeyword
+	          + "&api_key="+apiKey;
+	    $.ajax({
+	            type: "GET",
+	            dataType: 'json',
+	            cache: false,
+	            url: url,
+	            success: function (data) {
+		            
+		            console.log(data);
+		            recipes = data.Results;
+
+		            for(var i = 0; i < recipes.length; i++)
+		            	$scope.buildRecipe(recipes[i]);
+		            
+		            //$scope.CalcColumns();
+
+	            }
+	        });
+
+	}
+
+
+	$scope.CalcColumns = function(bypass)
+	{	
+		
+		var bypassSetColumnsCheck = bypass;
+		if( bypass == undefined ) bypassSetColumnsCheck = false;
+		
 		var FiveCol  = 1200;
 		var FourCol  = 992;
 		var ThreeCol = 768;
@@ -175,8 +145,10 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 		else
 			$scope.currentColumns = 1;
 
-		if( $scope.currentColumns != $scope.prevColumns )
+		if( bypassSetColumnsCheck || $scope.currentColumns != $scope.prevColumns )
+		//if( $scope.currentColumns != $scope.prevColumns )
 		{
+			console.log('call setColumns');
 			$scope.prevColumns = $scope.currentColumns;
 			$scope.SetColumns($scope.currentColumns);
 		}
@@ -186,23 +158,41 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 	$scope.SetColumns = function(numColumns)
 	{
-	    for(var x = 0; x < $scope.recipies.length; x++)
+	    for(var x = 0; x < $scope.recipes.length; x++)
 	    {
-	    	 var recipe = $scope.recipies[x];
+	    	 var recipe = $scope.recipes[x];
 	    	 recipe.column = recipe.index%numColumns;
 	    }
 
 	    $scope.$apply();
 	}
 
+	$scope.searchRecipes = function(keyPressedEvent)
+	{
+		if(keyPressedEvent.keyCode === 13)
+		{
+			$scope.recipes = new Array();
+            $scope.getRecipeJson($scope.searchString);
+		}
+    
+        return false; //Otherwise the form will be submitted
+	}
+
 	// run test on initial page load
-	$scope.CalcColumns();
+	//$scope.CalcColumns();
 
 	// run setColumns on resize of the window
 	$(window).resize($scope.CalcColumns);
 	
+	//$scope.getRecipeJson();
+
 
 
 }]);
+
+
+//Directives
+
+
 
 console.log("mainApp.js end");
