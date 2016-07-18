@@ -1,0 +1,168 @@
+
+  <div ng-controller="eatMe_Controller">
+
+    <div id="toolbar" class="navbar navbar-default navbar-fixed-top" >
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Browse Recipes <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">My Recent</a></li>
+            <li><a href="#">Popular</a></li>
+            <li class="divider"></li>
+            <li><a href="#">One more separated link</a></li>
+            <li class="divider"></li>
+          </ul>
+        </li>
+      </ul>
+
+      <form class="navbar-form navbar-left cust-width-50pct" role="search">
+        <div class="form-group cust-width-100pct">
+          <input type="text" ng-model="searchString" class="form-control cust-width-100pct" placeholder="Search" ng-keypress="searchRecipes($event)">
+        </div>
+      </form>
+    </div>
+     
+    <div class="container-fluid " id="outer-container" style="padding-top:74px;">
+    
+      <div id="col-1"  class="col clearfix">
+        <div id="{{recipe.index}}" class="card" ng-repeat="recipe in recipes | filter:{column : 0}" style="padding-bottom:{{recipe.heightPct}}%;">
+          <div id="{{recipe.id}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipe.id, recipe)" style="background-image:url({{recipe.imgURL}});width:100%;padding-bottom:{{recipe.heightPct}}%"></div>
+          <div id="{{recipe.id}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipe.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipe.id, recipe)">&times;</button>
+            <div>
+
+              <h3 id="{{recipe.index}}-title" class="cardTitle effect__click">{{recipe.name}}</h3>
+              <h5 id="{{recipe.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;{{recipe.desc}}</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;" href="{{recipe.recipeURL}}" target="_blank"> recipe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="col-2"  class="col clearfix" style="top:74px;">
+        <div id="{{recipe.index}}" class="card" ng-repeat="recipe in recipes | filter:{column : 1}" style="padding-bottom:{{recipe.heightPct}}%;">
+          <div id="{{recipe.id}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipe.id, recipe)" style="background-image:url({{recipe.imgURL}});width:100%;padding-bottom:{{recipe.heightPct}}%"></div>
+          <div id="{{recipe.id}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipe.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipe.id, recipe)">&times;</button>
+            <div>
+
+              <h3 id="{{recipe.index}}-title" class="cardTitle effect__click">{{recipe.name}}</h3>
+              <h5 id="{{recipe.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;{{recipe.desc}}</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;" href="{{recipe.recipeURL}}" target="_blank"> recipe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="col-3"  class="col clearfix" >
+        <div id="{{recipe.index}}" class="card" ng-repeat="recipe in recipes | filter:{column : 2}" style="padding-bottom:{{recipe.heightPct}}%;">
+          <div id="{{recipe.id}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipe.id, recipe)" style="background-image:url({{recipe.imgURL}});width:100%;padding-bottom:{{recipe.heightPct}}%"></div>
+          <div id="{{recipe.id}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipe.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipe.id, recipe)">&times;</button>
+            <div>
+
+              <h3 id="{{recipe.index}}-title" class="cardTitle effect__click">{{recipe.name}}</h3>
+              <h5 id="{{recipe.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;{{recipe.desc}}</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;" href="{{recipe.recipeURL}}" target="_blank"> recipe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="col-4"  class="col clearfix" >
+        <div id="{{recipe.index}}" class="card" ng-repeat="recipe in recipes | filter:{column : 3}" style="padding-bottom:{{recipe.heightPct}}%;">
+          <div id="{{recipe.id}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipe.id, recipe)" style="background-image:url({{recipe.imgURL}});width:100%;padding-bottom:{{recipe.heightPct}}%"></div>
+          <div id="{{recipe.id}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipe.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipe.id, recipe)">&times;</button>
+            <div>
+
+              <h3 id="{{recipe.index}}-title" class="cardTitle effect__click">{{recipe.name}}</h3>
+              <h5 id="{{recipe.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;{{recipe.desc}}</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;" href="{{recipe.recipeURL}}" target="_blank"> recipe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="col-5"  class="col clearfix" >
+        <div id="{{recipe.index}}" class="card" ng-repeat="recipe in recipes | filter:{column : 4}" style="padding-bottom:{{recipe.heightPct}}%;">
+          <div id="{{recipe.id}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipe.id, recipe)" style="background-image:url({{recipe.imgURL}});width:100%;padding-bottom:{{recipe.heightPct}}%"></div>
+          <div id="{{recipe.id}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipe.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipe.id, recipe)">&times;</button>
+            <div>
+
+              <h3 id="{{recipe.index}}-title" class="cardTitle effect__click">{{recipe.name}}</h3>
+              <h5 id="{{recipe.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;{{recipe.desc}}</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;" href="{{recipe.recipeURL}}" target="_blank"> recipe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="col-6"  class="col clearfix" >
+        <div id="{{recipe.index}}" class="card" ng-repeat="recipe in recipes | filter:{column : 5}" style="padding-bottom:{{recipe.heightPct}}%;">
+          <div id="{{recipe.id}}-img"  class="card card__front img-border-radius panel imgfill effect__click unblurImg" ng-click="showCardDetails(recipe.id, recipe)" style="background-image:url({{recipe.imgURL}});width:100%;padding-bottom:{{recipe.heightPct}}%"></div>
+          <div id="{{recipe.id}}-card" class="card__back img-border-radius panel" style="background-color: rgba(255, 255, 255, .5);display:none;">
+            <button id="{{recipe.index}}-close" type="button" class="close effect__click" style="margin-right:7px;" ng-click="showCardDetails(recipe.id, recipe)">&times;</button>
+            <div>
+
+              <h3 id="{{recipe.index}}-title" class="cardTitle effect__click">{{recipe.name}}</h3>
+              <h5 id="{{recipe.index}}-desc" class="cardDesc effect__click" style="height:100%;">&nbsp;&nbsp;&nbsp;&nbsp;{{recipe.desc}}</h5>
+            </div>
+            <div style="width:100%;display: table-cell;position: absolute;bottom:0px">
+              <a class="btn btn-link glyphicon glyphicon-heart-empty" style="width:50%;float:left;"> Favorites</a>
+              <a class="btn btn-link glyphicon glyphicon-list pull-left" style="width:50%;float:right;" href="{{recipe.recipeURL}}" target="_blank"> recipe</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+      <div class="col-lg-3 col-md-3" style="display:none; position:fixed; right:0px; top:74px;">
+        <div class="list-group">
+          <a href="#" class="list-group-item active">
+            <h4 class="list-group-item-heading">This Week's Plan</h4>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Sunday</h3>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Monday</h3>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Tuesday</h3>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Wednesday</h3>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Thursday</h3>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Friday</h3>
+          </a>
+          <a href="#" class="list-group-item">
+            <h3 class="list-group-item-heading">Saturday</h3>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div

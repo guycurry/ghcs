@@ -1,36 +1,6 @@
-var pg = require('pg');
+'use strict';
 
-pg.defaults.ssl = true;
-pg.connect(process.env.DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
-
-  client
-    .query('SELECT table_schema,table_name FROM information_schema.tables;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
-});
-
-var recipes;
-
-
-
-console.log("mainApp.js start");
-
-
-var eatMeApp = angular.module('eatMeApp', [])
-.config( [
-    '$compileProvider',
-    function( $compileProvider )
-    {   
-        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
-        // Angular before v1.2 uses $compileProvider.urlSanitizationWhitelist(...)
-    }
-]);
-
-
-eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope, $sce, $q){
+angular.module('eatMeApp').controller("MainRecipeSearch_Controller", ['$scope', '$sce', '$q', function($scope, $sce, $q){
 
 	console.log("eatMe App Start");
 	$scope.recipes = new Array();
@@ -189,10 +159,3 @@ eatMeApp.controller("eatMe_Controller", ['$scope', '$sce', '$q', function($scope
 
 
 }]);
-
-
-//Directives
-
-
-
-console.log("mainApp.js end");
